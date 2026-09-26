@@ -61,3 +61,11 @@ These recognizers are registered as predefined country-specific recognizers
 (`country_code: ca`) and are disabled by default in
 `presidio_analyzer/conf/default_recognizers.yaml`. To use them, instantiate
 the classes directly or enable them in your registry configuration.
+
+## Try it in the browser
+
+A client-side demo that mirrors these patterns (SIN with Luhn, OHIP, postal
+codes, plus credit cards, phone numbers, and emails) is live as the
+[Canadian PII Redaction Sandbox](https://movahedi.ca/tools/pii-redactor/).
+Everything runs in the visitor's browser: no backend, no storage, no network
+calls.
