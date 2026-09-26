@@ -39,8 +39,10 @@ def entities():
         ("130692545", 0, (), (),),
         ("435-418-166", 0, (), (),),
 
-        # --- Invalid: reserved first digit ---
-        ("046 454 286", 0, (), (),),
+        # --- First digit 0 or 8: reserved/test in production, Luhn still rules ---
+        # 046 454 286 is the official ESDC test SIN (Luhn-valid, matches)
+        ("046 454 286", 1, ((0, 11),), ((0.5, 0.81),),),
+        # 812 345 678 fails the Luhn checksum, no match
         ("812 345 678", 0, (), (),),
 
         # --- Invalid: all same digit ---

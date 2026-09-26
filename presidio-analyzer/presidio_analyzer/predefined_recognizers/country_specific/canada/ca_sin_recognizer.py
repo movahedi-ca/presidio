@@ -10,11 +10,12 @@ class CaSinRecognizer(PatternRecognizer):
 
     A SIN is a 9-digit number issued by Employment and Social Development Canada
     (ESDC) to administer various government programs. The last digit is a Luhn
-    check digit computed over the first 8 digits. SINs beginning with 0 or 8 are
-    reserved and not currently issued to individuals.
+    check digit computed over the first 8 digits. SINs beginning with 0 or 8
+    are reserved or test numbers (for example the official ESDC test SIN
+    046 454 286); detection relies on the Luhn checksum rather than the
+    first digit, since a checksum failure already rejects false positives.
 
     Format: DDD DDD DDD or DDD-DDD-DDD or DDDDDDDDD
-    First digit valid range: 1-7, 9
 
     Reference: https://www.canada.ca/en/employment-social-development/services/sin.html
 
@@ -27,8 +28,8 @@ class CaSinRecognizer(PatternRecognizer):
     COUNTRY_CODE = "ca"
 
     PATTERNS = [
-        Pattern("SIN (weak)", r"\b[1-79]\d{8}\b", 0.05),
-        Pattern("SIN (medium)", r"\b[1-79]\d{2}([- ])\d{3}\1\d{3}\b", 0.5),
+        Pattern("SIN (weak)", r"\b\d{9}\b", 0.05),
+        Pattern("SIN (medium)", r"\b\d{3}([- ])\d{3}\1\d{3}\b", 0.5),
     ]
 
     CONTEXT = [
